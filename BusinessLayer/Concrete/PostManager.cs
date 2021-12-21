@@ -14,6 +14,7 @@ namespace BusinessLayer.Concrete
     public class PostManager : IPostService
     {
         private readonly IPostDal _postDal;
+        private readonly IImageDal _imageDal = new EfImageDal();
 
         public PostManager(IPostDal postDal)
         {
@@ -81,7 +82,7 @@ namespace BusinessLayer.Concrete
 
             foreach (var item in list)
             {
-                item.Images = imageOpr.GetImagesByPostID(item.PostId);
+                item.Images = _imageDal.GetAll(x => x.PostId == item.PostId);
             }
 
             return list;
@@ -216,75 +217,72 @@ namespace BusinessLayer.Concrete
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e);
             }
             return posts;
         }
 
-        public PagedList<Post> GetPosts(int page, int pageSize, int categoryID, bool ordering, string seacrhKeyword = "")
+        public PagedList<Post> GetPosts(int page, int pageSize, int categoryId, bool ordering, string seacrhKeyword = "")
         {
             PagedList<Post> pagedPosts = null;
-            ImageOpr imageOpr = new ImageOpr();
             try
             {
-                using (var db = new RealtyContext())
+
+                if (String.IsNullOrEmpty(seacrhKeyword))
                 {
-                    if (seacrhKeyword == "" || seacrhKeyword == null)
+                    if (ordering)
                     {
-                        if (ordering)
+                        if (categoryId == 0)
                         {
-                            if (categoryID == 0)
-                            {
-                                pagedPosts = new PagedList<Post>(db.Posts.OrderByDescending(p => p.Viewing), page, pageSize);
-                            }
-                            else
-                            {
-                                pagedPosts = new PagedList<Post>(db.Posts.Where(p => p.CategoryID == categoryID).OrderByDescending(p => p.Viewing), page, pageSize);
-                            }
+                            pagedPosts = new PagedList<Post>(_postDal.GetAll().OrderByDescending(p => p.Viewing), page, pageSize);
                         }
                         else
                         {
-                            if (categoryID == 0)
-                            {
-                                pagedPosts = new PagedList<Post>(db.Posts.OrderByDescending(p => p.PostDate), page, pageSize);
-                            }
-                            else
-                            {
-                                pagedPosts = new PagedList<Post>(db.Posts.Where(p => p.CategoryID == categoryID).OrderByDescending(p => p.PostDate), page, pageSize);
-                            }
+                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.CategoryId == categoryId).OrderByDescending(p => p.Viewing), page, pageSize);
                         }
                     }
                     else
                     {
-                        if (ordering)
+                        if (categoryId == 0)
                         {
-                            if (categoryID == 0)
-                            {
-                                pagedPosts = new PagedList<Post>(db.Posts.Where(p => p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.Viewing), page, pageSize);
-                            }
-                            else
-                            {
-                                pagedPosts = new PagedList<Post>(db.Posts.Where(p => p.CategoryID == categoryID && p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.Viewing), page, pageSize);
-                            }
+                            pagedPosts = new PagedList<Post>(_postDal.GetAll().OrderByDescending(p => p.PostDate), page, pageSize);
                         }
                         else
                         {
-                            if (categoryID == 0)
-                            {
-                                pagedPosts = new PagedList<Post>(db.Posts.Where(p => p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.PostDate), page, pageSize);
-                            }
-                            else
-                            {
-                                pagedPosts = new PagedList<Post>(db.Posts.Where(p => p.CategoryID == categoryID && p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.PostDate), page, pageSize);
-                            }
+                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.CategoryId == categoryId).OrderByDescending(p => p.PostDate), page, pageSize);
                         }
                     }
-                    foreach (var post in pagedPosts)
+                }
+                else
+                {
+                    if (ordering)
                     {
-                        post.Images = imageOpr.GetImagesByPostID(post.PostId);
+                        if (categoryId == 0)
+                        {
+                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.Viewing), page, pageSize);
+                        }
+                        else
+                        {
+                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.CategoryId == categoryId && p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.Viewing), page, pageSize);
+                        }
                     }
+                    else
+                    {
+                        if (categoryId == 0)
+                        {
+                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.PostDate), page, pageSize);
+                        }
+                        else
+                        {
+                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.CategoryId == categoryId && p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.PostDate), page, pageSize);
+                        }
+                    }
+                }
+                foreach (var post in pagedPosts)
+                {
+                    post.Images = _imageDal.GetAll(x => x.PostId == post.PostId);
                 }
             }
             catch (Exception e)

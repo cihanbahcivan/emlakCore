@@ -16,7 +16,6 @@ namespace DataAccessLayer.Concrete.EntityFramework
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<District> Districts { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Image> Images { get; set; }

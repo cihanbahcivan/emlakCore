@@ -4,7 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using EntityLayer.Abstract;
+using CoreLayer.Entities;
+
 
 namespace CoreLayer.DataAccess
 {

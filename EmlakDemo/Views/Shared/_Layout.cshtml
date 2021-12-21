@@ -1,48 +1,331 @@
 ﻿<!DOCTYPE html>
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
 <html lang="en">
+<!--<![endif]-->
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EmlakDemo</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8">
+    <title>The Project | Shop List</title>
+    <meta name="description" content="The Project a Bootstrap-based, Responsive HTML5 Template">
+    <meta name="author" content="htmlcoder.me">
+
+    <!-- Mobile Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- Web Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link href="~/Content/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Fontello CSS -->
+    <link href="~/Content/fonts/fontello/css/fontello.css" rel="stylesheet">
+
+    <!-- Plugins -->
+    <link href="~/Content/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="~/Content/css/animations.css" rel="stylesheet">
+    <link href="~/Content/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="~/Content/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
+    <link href="~/Content/plugins/hover/hover-min.css" rel="stylesheet">
+
+    <!-- the project core CSS file -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+
+    <!-- Color Scheme (In order to change the color scheme, replace the blue.css with the color scheme that you prefer)-->
+    <link href="~/Content/css/skins/light_blue.css" rel="stylesheet">
+
+    <!-- Custom css -->
+    <link href="~/Content/css/custom.css" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EmlakDemo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+<!-- body classes:  -->
+<!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
+<!-- "pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1"> -->
+<!-- "transparent-header": makes the header transparent and pulls the banner to top -->
+<body class="no-trans  ">
+
+    <!-- scrollToTop -->
+    <!-- ================ -->
+    <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
+
+    <!-- page wrapper start -->
+    <!-- ================ -->
+    <div class="page-wrapper">
+
+        <!-- header-container start -->
+        <div class="header-container">
+
+            <!-- header-top start -->
+            <!-- classes:  -->
+            <!-- "dark": dark version of header top e.g. class="header-top dark" -->
+            <!-- "colored": colored version of header top e.g. class="header-top colored" -->
+            <!-- ================ -->
+            <div class="header-top dark ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-6 col-md-9">
+                            <!-- header-top-first start -->
+                            <!-- ================ -->
+                            <div class="header-top-first clearfix">
+                                <ul class="social-links circle small clearfix hidden-xs">
+                                    <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="skype"><a target="_blank" href="http://www.skype.com"><i class="fa fa-skype"></i></a></li>
+                                    <li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="youtube"><a target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube-play"></i></a></li>
+                                    <li class="flickr"><a target="_blank" href="http://www.flickr.com"><i class="fa fa-flickr"></i></a></li>
+                                    <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="pinterest"><a target="_blank" href="http://www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                                <div class="social-links hidden-lg hidden-md hidden-sm circle small">
+                                    <div class="btn-group dropdown">
+                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share-alt"></i></button>
+                                        <ul class="dropdown-menu dropdown-animation">
+                                            <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                            <li class="skype"><a target="_blank" href="http://www.skype.com"><i class="fa fa-skype"></i></a></li>
+                                            <li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                                            <li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
+                                            <li class="youtube"><a target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube-play"></i></a></li>
+                                            <li class="flickr"><a target="_blank" href="http://www.flickr.com"><i class="fa fa-flickr"></i></a></li>
+                                            <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                            <li class="pinterest"><a target="_blank" href="http://www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <ul class="list-inline hidden-sm hidden-xs">
+                                    <li><i class="fa fa-map-marker pr-5 pl-10"></i>Sakarya, Kemalpaşa 00054</li>
+                                    <li><i class="fa fa-phone pr-5 pl-10"></i>+90 504 589 45 25</li>
+                                    <li><i class="fa fa-envelope-o pr-5 pl-10"></i> emlak@mail.com</li>
+                                </ul>
+                            </div>
+                            <!-- header-top-first end -->
+                        </div>
+                        <div class="col-xs-9 col-sm-6 col-md-3">
+
+                            <!-- header-top-second start -->
+                            <!-- ================ -->
+                            <div id="header-top-second" class="clearfix">
+
+                                <!-- header top dropdowns start -->
+                                <!-- ================ -->
+                                <div class="header-top-dropdown text-right">
+                                    <div class="btn-group">
+                                        <a href="/Home/SingUp" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i> Kayıt Ol</a>
+                                    </div>
+                                    <div class="btn-group dropdown">
+                                        <button type="button" class="btn dropdown-toggle btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-lock pr-10"></i> Giriş Yap</button>
+                                        <ul class="dropdown-menu dropdown-menu-right dropdown-animation">
+                                            <li>
+                                                <form asp-action="Login">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Username</label>
+                                                        <input type="text" class="form-control" name="username" id="username" placeholder="">
+                                                        <i class="fa fa-user form-control-feedback"></i>
+                                                    </div>
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Password</label>
+                                                        <input type="password" class="form-control" name="password" id="password" placeholder="">
+                                                        <i class="fa fa-lock form-control-feedback"></i>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-gray btn-sm">Giriş Yap</button>
+                                                    </div>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--  header top dropdowns end -->
+                            </div>
+                            <!-- header-top-second end -->
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+            <!-- header-top end -->
+            <!-- header start -->
+            <!-- classes:  -->
+            <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
+            <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
+            <!-- "full-width": mandatory class for the full-width menu layout -->
+            <!-- "centered": mandatory class for the centered logo layout -->
+            <!-- ================ -->
+            <header class="header  fixed   clearfix">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - EmlakDemo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!-- header-left start -->
+                            <!-- ================ -->
+                            <div class="header-left clearfix">
+
+                                <!-- logo -->
+                                <!--<div id="logo" class="logo">
+                                    <a href="index.html"><img id="logo_img" src="images/logo_light_blue.png" alt="The Project"></a>
+                                </div>-->
+                                <!-- name-and-slogan -->
+                                <!--<div class="site-slogan">
+                                    Multipurpose HTML5 Template
+                                </div>-->
+
+                            </div>
+                            <!-- header-left end -->
+
+                        </div>
+                        <div class="col-md-9">
+
+                            <!-- header-right start -->
+                            <!-- ================ -->
+                            <div class="header-right clearfix">
+
+                                <!-- main-navigation start -->
+                                <!-- classes: -->
+                                <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
+                                <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
+                                <!-- "with-dropdown-buttons": Mandatory class that adds extra space, to the main navigation, for the search and cart dropdowns -->
+                                <!-- ================ -->
+                                <div class="main-navigation  animated with-dropdown-buttons">
+
+                                    <!-- navbar start -->
+                                    <!-- ================ -->
+                                    <nav class="navbar navbar-default" role="navigation">
+                                        <div class="container-fluid">
+
+                                            <!-- Toggle get grouped for better mobile display -->
+                                            <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                                                    <span class="sr-only">Toggle navigation</span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                </button>
+
+                                            </div>
+
+
+                                        </div>
+                                    </nav>
+                                    <!-- navbar end -->
+
+                                </div>
+                                <!-- main-navigation end -->
+                            </div>
+                            <!-- header-right end -->
+
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+            <!-- header end -->
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        <!-- header-container end -->
+
+        @RenderBody()
+        <!-- section start -->
+        <!-- ================ -->
+        <section class="section dark-bg pv-40 clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="call-to-action text-center">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <h2 class="title"><strong>Size</strong> ulaşalım</h2>
+                                    <p>Yeniliklerden haberdar olmak için e-posta adresinizi kaydedebilirsiniz.</p>
+                                    <div class="separator"></div>
+                                    <form class="form-inline margin-clear">
+                                        <div class="form-group has-feedback">
+                                            <label class="sr-only" for="subscribe3">E-Posta</label>
+                                            <input type="email" class="form-control form-control-lg" id="subscribe3" placeholder="E-Posta Gir" name="subscribe3" required="">
+                                            <i class="fa fa-envelope form-control-feedback"></i>
+                                        </div>
+                                        <button type="submit" class="btn btn-lg btn-gray-transparent btn-animated margin-clear">Gönder <i class="fa fa-send"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- section end -->
+
+    </div>
+    <!-- page-wrapper end -->
+    <!-- JavaScript files placed at the end of the document so the pages load faster -->
+    <!-- ================================================== -->
+    <!-- Jquery and Bootstap core js files -->
+    <script type="text/javascript" src="~/Content/plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Modernizr javascript -->
+    <script type="text/javascript" src="~/Content/plugins/modernizr.js"></script>
+
+    <!-- Isotope javascript -->
+    <script type="text/javascript" src="~/Content/plugins/isotope/isotope.pkgd.min.js"></script>
+
+    <!-- jQuery Revolution Slider  -->
+    <script type="text/javascript" src="~/Content/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="~/Content/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+
+    <!-- Magnific Popup javascript -->
+    <script type="text/javascript" src="~/Content/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Appear javascript -->
+    <script type="text/javascript" src="~/Content/plugins/waypoints/jquery.waypoints.min.js"></script>
+
+    <!-- Count To javascript -->
+    <script type="text/javascript" src="~/Content/plugins/jquery.countTo.js"></script>
+
+    <!-- Parallax javascript -->
+    <script src="~/Content/plugins/jquery.parallax-1.1.3.js"></script>
+
+    <!-- Contact form -->
+    <script src="~/Content/plugins/jquery.validate.js"></script>
+
+    <!-- Owl carousel javascript -->
+    <script type="text/javascript" src="~/Content/plugins/owl-carousel/owl.carousel.js"></script>
+
+    <!-- SmoothScroll javascript -->
+    <script type="text/javascript" src="~/Content/plugins/jquery.browser.js"></script>
+    <script type="text/javascript" src="~/Content/plugins/SmoothScroll.js"></script>
+
+    <!-- Initialization of Plugins -->
+    <script type="text/javascript" src="~/Content/js/template.js"></script>
+
+    <!-- Custom Scripts -->
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>
 </body>
 </html>
+
+<script>
+    $('#btnLogin').click(function () {
+        var password = $('#password').val();
+        var userName = $('#username').val();
+
+        $.ajax({
+            url: "/Home/Login",
+            type: "POST",
+            dataType: "json",
+            data: { password: password, username: userName },
+            success: function (data) {
+                if (data.result == 1)
+                    alert(data.message);
+                else
+                    alert("Başarısız!");
+            }
+        });
+    });
+</script>

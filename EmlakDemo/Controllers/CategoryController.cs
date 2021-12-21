@@ -122,12 +122,12 @@ namespace EmlakDemo.Controllers
         // POST: CategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Category category, IFormCollection collection)
         {
             int result = 0;
             try
             {
-                result = _categoryManager.Delete(id);
+                result = _categoryManager.Delete(category);
             }
             catch
             {

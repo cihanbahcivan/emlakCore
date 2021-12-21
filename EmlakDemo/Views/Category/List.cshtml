@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Category>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>List</h2>
+
+<p>
+    <a asp-action="Create">Yeni oluştur</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CategoryId">Düzenle</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.CategoryId">Detay</a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.CategoryId">Sil</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
