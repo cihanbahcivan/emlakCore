@@ -8,19 +8,19 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using PagedList.Core;
+using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete.EntityFramework;
 
 namespace EmlakDemo.Controllers
 {
     public class PostController : Controller
     {
         private readonly IPostService _postService;
-        public PostController(IPostService postService)
+        private readonly IImageService _imageService;
+        public PostController(IPostService postService, IImageService imageService)
         {
             _postService = postService;
-        }
-        public IActionResult Index()
-        {
-            return View();
+            _imageService = imageService;
         }
 
         public ActionResult List()
@@ -62,10 +62,19 @@ namespace EmlakDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Post post)
         {
+            PostManager pm = null;
+            Image image = null;
             int result = 0;
             try
             {
+                Image image1 = new Image();
+                pm = new PostManager(new EfPostDal());
+                post.Code = pm.ProduceCode(pm.GetPosts(1, 8, 0, false));
                 result = _postService.Add(post);
+                image1.ImageFile = "";
+                image1.PostId = post.PostId;
+                _imageService.Add(image1);
+
             }
             catch
             {

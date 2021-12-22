@@ -1,0 +1,124 @@
+﻿@model EntityLayer.Concrete.Post
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Sil</h2>
+
+<h3>Silmek istediğinize emin misiniz?</h3>
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Balkon
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Balcony)
+        </dd>
+        <dt>
+            Kat Sayısı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Floor)
+        </dd>
+        <dt>
+           Oda Sayısı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RoomCount)
+        </dd>
+        <dt>
+            Bina Yaşı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BuildingAge)
+        </dd>
+        <dt>
+            Site
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InSite)
+        </dd>
+        <dt>
+            Eşyalı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HasFurniture)
+        </dd>
+        <dt>
+            Banyo Sayısı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BathroomCount)
+        </dd>
+        <dt>
+            Metrekare
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SquareMeters)
+        </dd>
+        <dt>
+            İlan Tarihi
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostDate)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Vacancy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vacancy)
+        </dd>*@
+        <dt>
+            Isıtma
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatId)
+        </dd>
+        <dt>
+            Fiyat
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            Eski Fiyatı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OldPrice)
+        </dd>
+        <dt>
+            Gösterim Sayısı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Viewing)
+        </dd>
+        <dt>
+            İlan Açıklaması
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            İlan Başlığı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            İlan Kategorisi
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Categories.CategoryId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PostId" />
+        <input type="submit" value="Sil" class="btn btn-default" /> |
+        <a asp-action="List">Listeye dön</a>
+    </form>
+</div>

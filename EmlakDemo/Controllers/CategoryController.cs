@@ -13,13 +13,6 @@ namespace EmlakDemo.Controllers
     public class CategoryController : Controller
     {
         private CategoryManager _categoryManager = new CategoryManager(new EfCategoryDal());
-        public IActionResult Index()
-        {
-            var values = _categoryManager.GetAll();
-            return View(values);
-        }
-
-
 
         // GET: CategoryController
         public ActionResult List()

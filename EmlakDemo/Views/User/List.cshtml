@@ -1,0 +1,66 @@
+﻿@model IEnumerable<EntityLayer.Concrete.User>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Liste</h2>
+
+<p>
+    <a asp-action="Create">Yeni oluştur</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                E-posta)
+            </th>
+            <th>
+                Ad
+            </th>
+            <th>
+                Soyad
+            </th>
+            <th>
+                Şifre
+            </th>
+            <th>
+                Telefon Numarası
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UserId">Düzenle</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.UserId">Detay</a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.UserId">Sil</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

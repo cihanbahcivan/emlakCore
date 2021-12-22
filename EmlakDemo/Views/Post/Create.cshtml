@@ -1,0 +1,164 @@
+﻿@model EntityLayer.Concrete.Post
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Oluştur</h2>
+
+<h4>İlan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Resim</label>
+                <div class="col-md-10">
+                    <input class="form-control"  type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">İlan Açıklaması</label>
+                <div class="col-md-10">
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">İlan Başlığı</label>
+                <div class="col-md-10">
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2"> Kat Sayısı</label>
+                <div class="col-md-10">
+                    <input asp-for="Floor" class="form-control" />
+                    <span asp-validation-for="Floor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2"> Kategori ID</label>
+                <div class="col-md-10">
+                    <input asp-for="CategoryId" class="form-control" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Oda Sayısı</label>
+                <div class="col-md-10">
+                    <input asp-for="RoomCount" class="form-control" />
+                    <span asp-validation-for="RoomCount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Bina Yaşı</label>
+                <div class="col-md-10">
+                    <input asp-for="BuildingAge" class="form-control" />
+                    <span asp-validation-for="BuildingAge" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Banyo Sayısı</label>
+                <div class="col-md-10">
+                    <input asp-for="BathroomCount" class="form-control" />
+                    <span asp-validation-for="BathroomCount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Metrekare</label>
+                <div class="col-md-10">
+                    <input asp-for="SquareMeters" class="form-control" />
+                    <span asp-validation-for="SquareMeters" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostDate" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="PostDate" class="form-control" />
+                    <span asp-validation-for="PostDate" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Isıtma</label>
+                <div class="col-md-10">
+                    <input asp-for="HeatId" class="form-control" />
+                    <span asp-validation-for="HeatId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Fiyat</label>
+                <div class="col-md-10">
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Eski Fiyatı</label>
+                <div class="col-md-10">
+                    <input asp-for="OldPrice" class="form-control" />
+                    <span asp-validation-for="OldPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Gösterim Sayısı</label>
+                <div class="col-md-10">
+                    <input asp-for="Viewing" class="form-control" />
+                    <span asp-validation-for="Viewing" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="checkbox  col-md-10">
+                    <label>
+                        <input asp-for="InSite" /> Site
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="checkbox  col-md-10">
+                    <label>
+                        <input asp-for="HasFurniture" /> Eşyalı
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="checkbox  col-md-10">
+                    <label>
+                        <input asp-for="Vacancy" /> @Html.DisplayNameFor(model => model.Vacancy)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="checkbox  col-md-10">
+                    <label>
+                        <input asp-for="Balcony" /> Balkon
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-9"></div>
+                <input type="submit" value="Oluştur" class="btn btn-default col-md-1" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+        <a asp-action="List">Listeye dön</a>
+    </div>
+</div>
+

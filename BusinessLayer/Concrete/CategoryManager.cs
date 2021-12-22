@@ -20,7 +20,6 @@ namespace BusinessLayer.Concrete
         }
         public int Add(Category category)
         {
-
             try
             {
                 _categoryDal.Add(category);
@@ -30,7 +29,6 @@ namespace BusinessLayer.Concrete
                 Console.WriteLine(e);
                 return 0;
             }
-
             return 1;
         }
 

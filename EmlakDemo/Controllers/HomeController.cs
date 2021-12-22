@@ -12,6 +12,8 @@ using BusinessLayer.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication;
+using PagedList.Core;
+using EntityLayer.Concrete;
 
 namespace EmlakDemo.Controllers
 {
@@ -26,16 +28,26 @@ namespace EmlakDemo.Controllers
             _userService = userService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int pageSize = 8, int category = 0, bool ordering = false, string searchKeyword = "")
         {
-            CategoryManager cm = new CategoryManager(new EfCategoryDal());
-            var values = cm.GetAll();
-            return View(values);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            PagedList<Post> posts = null;
+            PostManager pm = null;
+            CategoryManager cm = null;
+            try
+            {
+                pm = new PostManager(new EfPostDal());
+                cm = new CategoryManager(new EfCategoryDal());
+                posts = pm.GetPosts(page, pageSize, category, ordering, searchKeyword);
+                posts = pm.SetDescriptionLimit(posts, 60);
+                ViewBag.BestSeller = pm.GetBestSeller();
+                ViewBag.MostExpensives = pm.GetMostExpensive();
+                ViewBag.Categories = cm.GetAll();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return View(posts);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -44,18 +56,51 @@ namespace EmlakDemo.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult ProductDetail(int postId)
+        {
+            PostManager pm = null;
+            Post post = null;
+            try
+            {
+                pm = new PostManager(new EfPostDal());
+                post = pm.GetById(postId);
+                pm.IncreaseViews(postId);
+                ViewBag.BestSeller = pm.GetBestSeller(5);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return View();
+        }
+
         public async Task<IActionResult> LoginAsync(string userName, string password)
         {
-            //_userService.GetAll()
-            if (_userService.IsUser(userName, password))
+            UserManager um = new UserManager(new EfUserDal());
+            User user = null;
+            try
             {
-                var claims = new List<Claim>
+                user = new User();
+                user.Name = userName;
+                user.Password = password;
+                if (um.IsUser(user))
                 {
-                    new Claim(ClaimTypes.Name, userName)
-                };
-                var userIdentity = new ClaimsIdentity(claims, "Admin");
-                ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-                await HttpContext.SignInAsync(principal);
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, userName)
+                    };
+                    var userIdentity = new ClaimsIdentity(claims, "Admin");
+                    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+                    await HttpContext.SignInAsync(principal);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return RedirectToAction("Index", "Home");
+            }
+            if (um.IsUser(user))
+            {
                 return RedirectToAction("Index", "Admin", new { area = "" });
             }
             else

@@ -122,7 +122,7 @@ namespace BusinessLayer.Concrete
             return posts;
         }
 
-        private string ProduceCode(PagedList<Post> posts)
+        public string ProduceCode(PagedList<Post> posts)
         {
             Random rnd = new Random();
             string chars = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZabcçdefgğhıijklmnoöprsştuüvyz";

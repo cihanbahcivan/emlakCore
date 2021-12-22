@@ -1,0 +1,139 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Post>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Post Listesi</h2>
+
+<p>
+    <a asp-action="Create">Yeni bir tane oluştur</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">
+                Balkon
+            </th>
+            <th scope="col">
+                Kat Sayısı
+            </th>
+            <th scope="col">
+                Oda Sayısı
+            </th>
+            <th scope="col">
+                Bina Yaşı
+            </th>
+            <th scope="col">
+                Site
+            </th>
+            <th scope="col">
+                Eşyalı
+            </th>
+            <th scope="col">
+                Banyo Sayısı
+            </th>
+            <th scope="col">
+                Metrekare
+            </th>
+            <th scope="col">
+                İlan Tarihi
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Vacancy)
+            </th>
+            <th scope="col">
+                Isıtma
+            </th>
+            <th scope="col">
+                Fiyat
+            </th>
+            <th scope="col">
+                Eski Fiyat
+            </th>
+            <th scope="col">
+                Gösterim Sayısı
+            </th>
+            <th scope="col">
+                İlan Açıklaması
+            </th>
+            <th scope="col">
+                İlan Başlığı
+            </th>
+            <th scope="col">
+                Kategorisi
+            </th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.Balcony)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.Floor)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.RoomCount)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.BuildingAge)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.InSite)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.HasFurniture)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.BathroomCount)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.SquareMeters)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.PostDate)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.Vacancy)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.HeatId)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.Price)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.OldPrice)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.Viewing)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.Description, new { maxlength = "50" })
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.Title)
+            </th>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.Categories.CategoryId)
+            </th>
+            <td scope="col">
+                <a asp-action="Edit" asp-route-id="@item.PostId">Düzenle</a>
+            </td>
+            <td scope="col">
+                <a asp-action="Details" asp-route-id="@item.PostId">Detay</a>
+            </td>
+            <td scope="col">
+                <a asp-action="Delete" asp-route-id="@item.PostId">Sil</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
