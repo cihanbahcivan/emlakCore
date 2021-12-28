@@ -20,17 +20,15 @@ namespace EmlakDemo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, IUserService userService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _userService = userService;
         }
 
         public IActionResult Index(int page = 1, int pageSize = 8, int category = 0, bool ordering = false, string searchKeyword = "")
         {
-            PagedList<Post> posts = null;
+            List<Post> posts = null;
             PostManager pm = null;
             CategoryManager cm = null;
             try
@@ -71,7 +69,7 @@ namespace EmlakDemo.Controllers
             {
                 Console.WriteLine(e);
             }
-            return View();
+            return View(post);
         }
 
         public async Task<IActionResult> LoginAsync(string userName, string password)
@@ -83,7 +81,7 @@ namespace EmlakDemo.Controllers
                 user = new User();
                 user.Name = userName;
                 user.Password = password;
-                if (um.IsUser(user))
+                if (um.IsUser(userName, password))
                 {
                     var claims = new List<Claim>
                     {
@@ -99,7 +97,7 @@ namespace EmlakDemo.Controllers
                 Console.WriteLine(e);
                 return RedirectToAction("Index", "Home");
             }
-            if (um.IsUser(user))
+            if (um.IsUser(userName, password))
             {
                 return RedirectToAction("Index", "Admin", new { area = "" });
             }

@@ -7,12 +7,14 @@ using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete.EntityFramework;
 
 namespace EmlakDemo.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserService _userService;
+        UserManager userManager = new UserManager(new EfUserDal());
         // GET: AdminController
         [Authorize]
         public IActionResult Index()
@@ -20,17 +22,13 @@ namespace EmlakDemo.Controllers
             return View();
         }
 
-        public UserController(IUserService userService)
-        {
-            _userService = userService;
-        }
 
         // GET: UserController;
         [Authorize]
         public ActionResult List()
         {
             List<User> users = new List<User>();
-            users = _userService.GetAll();
+            users = userManager.GetAll();
             return View(users);
         }
 
@@ -39,7 +37,7 @@ namespace EmlakDemo.Controllers
         public ActionResult Details(int id)
         {
             User user = null;
-            user = _userService.GetById(id);
+            user = userManager.GetById(id);
             return View(user);
         }
 
@@ -67,7 +65,7 @@ namespace EmlakDemo.Controllers
                 user.Password = collection["Password"];
                 user.PhoneNumber = collection["PhoneNumber"];
                 //user.Post = collection["Post"];
-                result = _userService.Add(user);
+                result = userManager.Add(user);
             }
             catch
             {
@@ -88,7 +86,7 @@ namespace EmlakDemo.Controllers
         public ActionResult Edit(int id)
         {
             User user = null;
-            user = _userService.GetById(id);
+            user = userManager.GetById(id);
             return View(user);
         }
 
@@ -102,7 +100,7 @@ namespace EmlakDemo.Controllers
             int result = 0;
             try
             {
-                user = _userService.GetById(id);
+                user = userManager.GetById(id);
                 if (user != null)
                 {
                     user = new User();
@@ -113,7 +111,7 @@ namespace EmlakDemo.Controllers
                     user.PhoneNumber = collection["PhoneNumber"];
                     user.UserId = id;
                     //user.Post = collection["Post"];
-                    result = _userService.Update(user);
+                    result = userManager.Update(user);
                 }
             }
             catch
@@ -137,7 +135,7 @@ namespace EmlakDemo.Controllers
             User user = null;
             try
             {
-                user = _userService.GetById(id);
+                user = userManager.GetById(id);
             }
             catch (Exception e)
             {
@@ -155,7 +153,7 @@ namespace EmlakDemo.Controllers
             int result = 0;
             try
             {
-                result = _userService.Delete(user);
+                result = userManager.Delete(user);
             }//TEST EDİLECEK
             catch
             {

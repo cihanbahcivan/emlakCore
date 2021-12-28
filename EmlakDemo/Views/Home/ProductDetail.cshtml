@@ -44,7 +44,7 @@
                         <div class="tab-content clear-style">
                             <div class="tab-pane active" id="pill-1">
                                 <div class="owl-carousel content-slider-with-large-controls">
-                                    @if (Model.Images != null)
+                                   @* @if (Model.Images != null)
                                     {
                                         @foreach (var item in Model.Images)
                                         {
@@ -53,7 +53,7 @@
                                                 <a href="~/Content/Images/@item.ImageFile" class="popup-img overlay-link" title="image title"><i class="icon-plus-1"></i></a>
                                             </div>
                                         }
-                                    }
+                                    }*@
                                 </div>
                             </div>
                             <div class="tab-pane" id="pill-2">
@@ -238,12 +238,12 @@
                                 <div class="media margin-clear">
                                     <div class="media-left">
                                         <div class="overlay-container">
-                                            <img class="media-object" src="~/Content/images/@item.Images[0].ImgFile" alt="blog-thumb">
-                                            <a href="/Home/ProductDetail?postId=@item.PostID" class="overlay-link small"><i class="fa fa-link"></i></a>
+                                            <img class="media-object" src="~/Content/images/@item.Images[0].ImageFile" alt="blog-thumb">
+                                            <a href="/Home/ProductDetail?postId=@item.PostId" class="overlay-link small"><i class="fa fa-link"></i></a>
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h6 class="media-heading"><a href="/Home/ProductDetail?postId=@item.PostID">@item.Title</a></h6>
+                                        <h6 class="media-heading"><a href="/Home/ProductDetail?postId=@item.PostId">@item.Title</a></h6>
                                         <p class="margin-clear">
                                             <i class="fa fa-star text-default"></i>
                                             <i class="fa fa-star text-default"></i>

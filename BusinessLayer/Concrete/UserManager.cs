@@ -89,11 +89,11 @@ namespace BusinessLayer.Concrete
             return user;
         }
 
-        public bool IsUser(User userObj)
+        public bool IsUser(string userName, string password)
         {
             try
             {
-                var user = _userDal.Get(x => x.Email == userObj.Email && x.Password == userObj.Password);
+                var user = _userDal.Get(x => x.Name == userName && x.Password == password);
                 if (user != null)
                 {
                     return true;

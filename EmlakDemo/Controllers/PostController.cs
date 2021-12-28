@@ -15,22 +15,16 @@ namespace EmlakDemo.Controllers
 {
     public class PostController : Controller
     {
-        private readonly IPostService _postService;
-        private readonly IImageService _imageService;
-        public PostController(IPostService postService, IImageService imageService)
-        {
-            _postService = postService;
-            _imageService = imageService;
-        }
-
+        PostManager postManager = new PostManager(new EfPostDal());
+        ImageManager imageManager = new ImageManager(new EfImageDal());
         public ActionResult List()
         {
-            PagedList<Post> posts = null;
+            List<Post> posts = null;
             try
             {
-                posts = _postService.GetPosts(1, 8, 0, false);
-                posts = _postService.SetDescriptionLimit(posts, 50);
-                posts = _postService.SetTitleLimit(posts, 35);
+                posts = postManager.GetPosts(1, 8, 0, false);
+                posts = postManager.SetDescriptionLimit(posts, 50);
+                posts = postManager.SetTitleLimit(posts, 35);
             }
             catch (Exception e)
             {
@@ -45,7 +39,7 @@ namespace EmlakDemo.Controllers
         public ActionResult Details(int id)
         {
             Post post = null;
-            post = _postService.GetById(id);
+            post = postManager.GetById(id);
             return View(post);
         }
 
@@ -70,10 +64,10 @@ namespace EmlakDemo.Controllers
                 Image image1 = new Image();
                 pm = new PostManager(new EfPostDal());
                 post.Code = pm.ProduceCode(pm.GetPosts(1, 8, 0, false));
-                result = _postService.Add(post);
+                result = postManager.Add(post);
                 image1.ImageFile = "";
                 image1.PostId = post.PostId;
-                _imageService.Add(image1);
+                imageManager.Add(image1);
 
             }
             catch
@@ -95,7 +89,7 @@ namespace EmlakDemo.Controllers
         public ActionResult Edit(int id)
         {
             Post post = null;
-            post = _postService.GetById(id);
+            post = postManager.GetById(id);
             return View(post);
         }
 
@@ -108,7 +102,7 @@ namespace EmlakDemo.Controllers
             int result = 0;
             try
             {
-                result = _postService.Update(post);
+                result = postManager.Update(post);
             } //TEST EDİLECEK
             catch
             {
@@ -131,7 +125,7 @@ namespace EmlakDemo.Controllers
             Post post = null;
             try
             {
-                post = _postService.GetById(id);
+                post = postManager.GetById(id);
             }
             catch (Exception)
             {
@@ -150,7 +144,7 @@ namespace EmlakDemo.Controllers
             int result = 0;
             try
             {
-                result = _postService.Delete(post);
+                result = postManager.Delete(post);
             }//TEST EDİLECEK
             catch
             {

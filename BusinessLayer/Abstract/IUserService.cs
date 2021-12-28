@@ -10,6 +10,6 @@ namespace BusinessLayer.Abstract
         public int Delete(User user);
         public User GetById(int id);
         public List<User> GetAll();
-        public bool IsUser(User userObj);
+        public bool IsUser(string userName, string password);
     }
 }

@@ -7,7 +7,6 @@ using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFramework;
 using EntityLayer.Concrete;
-using PagedList.Core;
 
 namespace BusinessLayer.Concrete
 {
@@ -122,7 +121,7 @@ namespace BusinessLayer.Concrete
             return posts;
         }
 
-        public string ProduceCode(PagedList<Post> posts)
+        public string ProduceCode(List<Post> posts)
         {
             Random rnd = new Random();
             string chars = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZabcçdefgğhıijklmnoöprsştuüvyz";
@@ -178,7 +177,7 @@ namespace BusinessLayer.Concrete
             }
         }
 
-        public PagedList<Post> SetTitleLimit(PagedList<Post> posts, int limit)
+        public List<Post> SetTitleLimit(List<Post> posts, int limit)
         {
             StringBuilder title = null;
             try
@@ -201,7 +200,7 @@ namespace BusinessLayer.Concrete
             return posts;
         }
 
-        public PagedList<Post> SetDescriptionLimit(PagedList<Post> posts, int limit)
+        public List<Post> SetDescriptionLimit(List<Post> posts, int limit)
         {
             StringBuilder description = null;
             try
@@ -224,9 +223,9 @@ namespace BusinessLayer.Concrete
             return posts;
         }
 
-        public PagedList<Post> GetPosts(int page, int pageSize, int categoryId, bool ordering, string seacrhKeyword = "")
+        public List<Post> GetPosts(int page, int pageSize, int categoryId, bool ordering, string seacrhKeyword = "")
         {
-            PagedList<Post> pagedPosts = null;
+            List<Post> pagedPosts = null;
             try
             {
 
@@ -236,22 +235,22 @@ namespace BusinessLayer.Concrete
                     {
                         if (categoryId == 0)
                         {
-                            pagedPosts = new PagedList<Post>(_postDal.GetAll().OrderByDescending(p => p.Viewing), page, pageSize);
+                            pagedPosts = _postDal.GetAll().OrderByDescending(p => p.Viewing).ToList();
                         }
                         else
                         {
-                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.CategoryId == categoryId).OrderByDescending(p => p.Viewing), page, pageSize);
+                            pagedPosts = _postDal.GetAll().Where(p => p.CategoryId == categoryId).OrderByDescending(p => p.Viewing).ToList();
                         }
                     }
                     else
                     {
                         if (categoryId == 0)
                         {
-                            pagedPosts = new PagedList<Post>(_postDal.GetAll().OrderByDescending(p => p.PostDate), page, pageSize);
+                            pagedPosts = _postDal.GetAll().OrderByDescending(p => p.PostDate).ToList();
                         }
                         else
                         {
-                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.CategoryId == categoryId).OrderByDescending(p => p.PostDate), page, pageSize);
+                            pagedPosts = _postDal.GetAll().Where(p => p.CategoryId == categoryId).OrderByDescending(p => p.PostDate).ToList();
                         }
                     }
                 }
@@ -261,22 +260,22 @@ namespace BusinessLayer.Concrete
                     {
                         if (categoryId == 0)
                         {
-                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.Viewing), page, pageSize);
+                            pagedPosts = _postDal.GetAll().Where(p => p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.Viewing).ToList();
                         }
                         else
                         {
-                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.CategoryId == categoryId && p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.Viewing), page, pageSize);
+                            pagedPosts = _postDal.GetAll().Where(p => p.CategoryId == categoryId && p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.Viewing).ToList();
                         }
                     }
                     else
                     {
                         if (categoryId == 0)
                         {
-                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.PostDate), page, pageSize);
+                            pagedPosts = _postDal.GetAll().Where(p => p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.PostDate).ToList();
                         }
                         else
                         {
-                            pagedPosts = new PagedList<Post>(_postDal.GetAll().Where(p => p.CategoryId == categoryId && p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.PostDate), page, pageSize);
+                            pagedPosts = _postDal.GetAll().Where(p => p.CategoryId == categoryId && p.Title.Contains(seacrhKeyword)).OrderByDescending(p => p.PostDate).ToList();
                         }
                     }
                 }
