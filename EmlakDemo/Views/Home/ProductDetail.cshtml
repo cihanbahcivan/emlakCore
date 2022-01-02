@@ -44,16 +44,16 @@
                         <div class="tab-content clear-style">
                             <div class="tab-pane active" id="pill-1">
                                 <div class="owl-carousel content-slider-with-large-controls">
-                                   @* @if (Model.Images != null)
+                                    @if (Model.Images != null)
                                     {
                                         @foreach (var item in Model.Images)
                                         {
                                             <div class="overlay-container overlay-visible">
-                                                <img src="~/Content/Images/@item.ImageFile" alt="">
-                                                <a href="~/Content/Images/@item.ImageFile" class="popup-img overlay-link" title="image title"><i class="icon-plus-1"></i></a>
+                                                <img src="~/Content/images/@item.ImageFile" alt="">
+                                                <a href="~/Content/images/@item.ImageFile" class="popup-img overlay-link" title="image title"><i class="icon-plus-1"></i></a>
                                             </div>
                                         }
-                                    }*@
+                                    }
                                 </div>
                             </div>
                             <div class="tab-pane" id="pill-2">

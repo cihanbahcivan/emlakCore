@@ -66,7 +66,6 @@ namespace BusinessLayer.Concrete
         public Post GetById(int id)
         {
             var post = _postDal.Get(x => x.PostId == id);
-            //post.Images = ImageOpr.GetImagesByPostId(post.PostId);
             return post;
         }
 
@@ -111,7 +110,7 @@ namespace BusinessLayer.Concrete
                 posts = _postDal.GetAll().OrderByDescending(x => x.Price).Take(size).ToList();
                 foreach (var post in posts)
                 {
-                    //post.Images = imageOpr.GetImagesByPostId(post.PostId);
+                    post.Images = _imageDal.GetAll().Where(x => x.PostId == post.PostId).ToList();
                 }
             }
             catch (Exception e)
@@ -148,19 +147,19 @@ namespace BusinessLayer.Concrete
 
         private bool CheckCode(string code)
         {
-            bool result = false;
+            bool result = true;
             Post post = null;
             try
             {
                 post = _postDal.GetAll().FirstOrDefault(c => c.Code == code);
                 if (post != null)
                 {
-                    result = true;
+                    result = false;
                 }
             }
             catch (Exception)
             {
-                result = false;
+                result = true;
             }
             return result;
         }

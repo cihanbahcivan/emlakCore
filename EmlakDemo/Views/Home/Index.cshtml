@@ -48,7 +48,7 @@
                                             <div class="overlay-container">
                                                 @if (@post.Images != null && post.Images.Count > 0)
                                                 {
-                                                    <img src="~/Content/images/@post.Images[0].ImageId" alt="">
+                                                    <img src="~/Content/images/@post.Images[0].ImageFile" alt="">
                                                     <a class="overlay-link" href="~/Content/images/@post.Images[0].ImageFile"><i class="fa fa-plus"></i></a>
                                                 }
                                                 <span class="badge">30% OFF</span>
@@ -104,7 +104,7 @@
                             </ol>
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
-                               @* @{
+                                @{
                                     int counter = 0;
                                     @foreach (var item in ViewBag.BestSeller)
                                     {
@@ -113,9 +113,13 @@
                                             <div class="item active">
                                                 <div class="listing-item">
                                                     <div class="overlay-container">
-                                                        <img src="~/Content/images/@item.Images[0].ImageFile" alt="product 1">
-                                                        <span class="badge">30% OFF</span>
-                                                        <a href="/Home/ProductDetail?postId=@item.PostId" class="overlay-link"><i class="fa fa-link"></i></a>
+                                                        @if (@item.Images != null && item.Images.Count > 0)
+                                                        {
+                                                            <img src="~/Content/images/@item.Images[0].ImageFile" alt="product 1">
+                                                            <span class="badge">30% OFF</span>
+                                                            <a href="/Home/ProductDetail?postId=@item.PostId" class="overlay-link"><i class="fa fa-link"></i></a>
+                                                        }
+
                                                     </div>
                                                     <h3><a href="/Home/ProductDetail?postId=@item.PostId">@item.Title</a></h3>
                                                     <span class="price"><del>@item.OldPrice ₺</del> @item.Price ₺</span>
@@ -127,9 +131,13 @@
                                             <div class="item">
                                                 <div class="listing-item">
                                                     <div class="overlay-container">
+                                                        @if (@item.Images != null && item.Images.Count > 0)
+                                                        {
                                                         <img src="~/Content/images/@item.Images[0].ImageFile" alt="product 1">
                                                         <span class="badge">30% OFF</span>
                                                         <a href="/Home/ProductDetail?postId=@item.PostId" class="overlay-link"><i class="fa fa-link"></i></a>
+                                                        }
+
                                                     </div>
                                                     <h3><a href="/Home/ProductDetail?postId=@item.PostId">@item.Title</a></h3>
                                                     <span class="price"><del>@item.OldPrice ₺</del> @item.Price ₺</span>
@@ -138,21 +146,25 @@
                                         }
                                         counter++;
                                     }
-                                }*@
+                                }
                             </div>
                         </div>
                     </div>
                     <div class="block clearfix">
                         <h3 class="title">En Pahalılar</h3>
                         <div class="separator-2"></div>
-                        @*@{
+                        @{
                             @foreach (var item in ViewBag.MostExpensives)
                             {
                                 <div class="media margin-clear">
                                     <div class="media-left">
                                         <div class="overlay-container">
-                                            <img class="media-object" src="~/Content/images/@item.Images[0].ImageFile" alt="blog-thumb">
-                                            <a href="/Home/ProductDetail?postId=@item.PostId" class="overlay-link small"><i class="fa fa-link"></i></a>
+                                        @if (@item.Images != null && item.Images.Count > 0)
+                                        {
+                                                            <img class="media-object" src="~/Content/images/@item.Images[0].ImageFile" alt="blog-thumb">
+                                                    <a href="/Home/ProductDetail?postId=@item.PostId" class="overlay-link small"><i class="fa fa-link"></i></a>
+                                        }
+                                            
                                         </div>
                                     </div>
                                     <div class="media-body">
@@ -169,7 +181,7 @@
                                     <hr>
                                 </div>
                             }
-                        }*@
+                        }
                     </div>
                     <div class="block clearfix">
                         <h3 class="title">Kategoriler</h3>

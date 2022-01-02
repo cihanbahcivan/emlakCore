@@ -20,6 +20,7 @@ namespace EmlakDemo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -57,12 +58,15 @@ namespace EmlakDemo.Controllers
         public IActionResult ProductDetail(int postId)
         {
             PostManager pm = null;
+            ImageManager im = null;
             Post post = null;
             try
             {
                 pm = new PostManager(new EfPostDal());
+                im = new ImageManager(new EfImageDal());
                 post = pm.GetById(postId);
                 pm.IncreaseViews(postId);
+                post.Images = im.GetAll().Where(x => x.PostId == postId).ToList();
                 ViewBag.BestSeller = pm.GetBestSeller(5);
             }
             catch (Exception e)
